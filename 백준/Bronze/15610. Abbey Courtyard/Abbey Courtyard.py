@@ -1,2 +1,1 @@
-n = int(input())
-print(f"{n**0.5*4}")
+print(f"{int(input())**0.5*4}")
