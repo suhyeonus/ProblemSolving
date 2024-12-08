@@ -15,9 +15,8 @@ for i in range(1, n+1):
             # 소인수분해 가능한 수가 k보다 클 경우 바로 break
             if tmp > k: break
             if not i % tmp:
-                while not i % tmp:
-                    i //= tmp 
-            tmp += 1
+                i //= tmp
+            else: tmp += 1
         else: ans += 1
 
 print(ans)
