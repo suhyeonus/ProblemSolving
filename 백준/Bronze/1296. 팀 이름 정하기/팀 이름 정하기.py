@@ -12,5 +12,4 @@ for _ in range(int(input())):
     E = engName.count('E') + name.count('E')
     team[name] = ((L+O) * (L+V) * (L+E) * (O+V) * (O+E) * (V+E)) % 100
 
-team = sorted(team.items(), key=lambda x:(-x[1], x[0]))
-print(team[0][0])
+print(sorted(team.items(), key=lambda x:(-x[1], x[0]))[0][0])
