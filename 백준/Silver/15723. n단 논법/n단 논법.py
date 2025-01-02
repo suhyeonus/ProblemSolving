@@ -10,6 +10,7 @@ def bfs(x, y):
         n = q.popleft()
         if n == y: return "T"
         if graph[n] and not visit[graph[n]]:
+            visit[graph[n]] = 1
             q.append(graph[n]) 
 
     return "F"
