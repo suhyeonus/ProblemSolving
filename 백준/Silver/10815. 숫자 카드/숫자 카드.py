@@ -1,16 +1,10 @@
 import sys 
 input = sys.stdin.readline 
 
-plus = [0] * 10000001
-minus = [0] * 10000001
-
 n = int(input())
-card = list(map(int, input().split()))
-for i in card:
-    if i < 0: minus[i] += 1
-    else: plus[i] += 1
-
+card = set(map(int, input().split()))
 m = int(input())
 isExist = list(map(int, input().split()))
+
 for i in isExist:
-    print(minus[i], end=' ') if i < 0 else print(plus[i], end=' ')
+    print(1, end=' ') if i in card else print(0, end=' ') 
