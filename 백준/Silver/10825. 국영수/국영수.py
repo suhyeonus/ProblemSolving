@@ -2,11 +2,10 @@ import sys
 input = sys.stdin.readline 
 
 N = int(input())
-dict = {}
+stdt = []
 for i in range(N):
-    name, kor, eng, mat = input().rstrip().split()
-    dict[name] = [int(kor), int(eng), int(mat)]
+    stdt.append(input().rstrip().split())
 
-dict = sorted(dict.items(), key=lambda x:(-x[1][0], x[1][1], -x[1][2], x[0]))
-for i in dict: 
-    print(i[0]) 
+stdt.sort(key=lambda x:(-int(x[1]), int(x[2]), -int(x[3]), x[0]))
+for i in stdt:
+    print(i[0])
