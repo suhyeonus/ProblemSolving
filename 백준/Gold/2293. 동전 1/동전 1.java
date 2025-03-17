@@ -14,13 +14,11 @@ public class Main {
         for(int i = 1; i <= n; i++)
             coins[i] = Integer.parseInt(br.readLine());
 
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= k ; j++) {
+        for(int i = 1; i <= n; i++)
+            for(int j = 1; j <= k ; j++)
                 if(j > coins[i])
                     dp[j] += dp[j-coins[i]];
                 else if (j == coins[i]) dp[j] += 1;
-            }
-        }
 
         System.out.print(dp[k]);
     }
