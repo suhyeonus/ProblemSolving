@@ -7,21 +7,20 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int D = Integer.parseInt(st.nextToken());
         int P = Integer.parseInt(st.nextToken());
-        int[][] dp = new int[P+1][D+1];
+        int[] dp = new int[D+1];
 
         for(int i = 1; i <= P; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             int L = Integer.parseInt(st.nextToken());
             int C = Integer.parseInt(st.nextToken());
 
-            for(int j = 1; j <= D; j++) 
+            for(int j = D; j >= 1; j--) 
                 if (j == L) 
-                    dp[i][j] = Math.max(C, dp[i-1][j]);
+                    dp[j] = Math.max(C, dp[j]);
                 else if (j >= L) 
-                    dp[i][j] = Math.max(Math.min(dp[i-1][j-L], C), dp[i-1][j]);
-                else dp[i][j] = dp[i-1][j];
+                    dp[j] = Math.max(Math.min(dp[j-L], C), dp[j]);
         }
         
-        System.out.print(dp[P][D]);
+        System.out.print(dp[D]);
     }
 }
