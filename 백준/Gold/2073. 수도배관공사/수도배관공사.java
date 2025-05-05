@@ -15,13 +15,13 @@ public class Main {
             int C = Integer.parseInt(st.nextToken());
 
             for(int j = 1; j <= D; j++) 
-                if(j == L) {
+                if (j == L) 
                     dp[i][j] = Math.max(C, dp[i-1][j]);
-                }
-                else if(j >= L) {
+                else if (j >= L) 
                     dp[i][j] = Math.max(Math.min(dp[i-1][j-L], C), dp[i-1][j]);
-                } else dp[i][j] = dp[i-1][j];
+                else dp[i][j] = dp[i-1][j];
         }
+        
         System.out.print(dp[P][D]);
     }
 }
