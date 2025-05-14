@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+	
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int X = Integer.parseInt(st.nextToken());
@@ -17,21 +17,22 @@ public class Main {
 			sum[i] = sum[i-1] + Integer.parseInt(st.nextToken());
 
 		int max = 0;
-		HashMap<Integer, Integer> hs = new HashMap<Integer, Integer>();
+		int maxCnt = 1;
 		for(int i = X; i <= N; i++) {
 			int subset = sum[i] - sum[i-X];
-			if(!hs.containsKey(subset))
-				hs.put(subset, 1);
-			else 
-				hs.replace(subset, hs.get(subset) + 1);
-			max = Math.max(max, subset);
+			if (subset == max)
+				maxCnt++;
+			else if (subset > max) {
+				max = subset;
+				maxCnt = 1;
+			}
 		}
 		
 		if(max == 0)
 			System.out.print("SAD");
 		else {
 			System.out.println(max);
-			System.out.print(hs.get(max));
+			System.out.print(maxCnt);
 		}
 	} 
 }
