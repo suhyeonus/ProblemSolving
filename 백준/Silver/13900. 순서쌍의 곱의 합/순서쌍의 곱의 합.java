@@ -7,18 +7,16 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int n = Integer.parseInt(br.readLine());
-		long arr[] = new long[n];
 		long sub[] = new long[n];
 		
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		for(int i = 0; i < n; i++)
-			arr[i] = Integer.parseInt(st.nextToken());
 		
 		long answer = 0;
-		sub[0] = arr[0];
+		sub[0] = Integer.parseInt(st.nextToken());
 		for(int i = 1; i < n; i++) {
-			sub[i] = sub[i-1] + arr[i];
-			answer += arr[i] * sub[i-1];
+			int val = Integer.parseInt(st.nextToken());
+			sub[i] = sub[i-1] + val;
+			answer += val * sub[i-1];
 		}
 			
 		System.out.print(answer);
