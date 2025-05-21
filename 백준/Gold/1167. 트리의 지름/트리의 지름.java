@@ -9,71 +9,71 @@ class Node {
 	int number;
 	int weight;
 	
-	public Node(int number, int weight) {
+	public Node (int number, int weight) {
 		this.number = number;
 		this.weight = weight;
 	}
 }
 
 public class Main {
-	static ArrayList<Node>[] graph;
-	static boolean[] visit;
-	static int[] distance;
+	
+	private static ArrayList<Node>[] graph;
+	private static boolean[] visit;
+	private static int[] distance;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int V = Integer.parseInt(br.readLine());
+		StringTokenizer st;
 		
-		// init & input
-		graph = new ArrayList[V+1];
-		for(int i = 1; i <= V; i++) 
+		// init
+		int v = Integer.parseInt(br.readLine());
+		graph = new ArrayList[v+1];
+		for(int i = 1; i <= v; i++)
 			graph[i] = new ArrayList<Node>();
-			
-		for(int i = 0; i < V; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-			int index = Integer.parseInt(st.nextToken());
+		
+		for(int i = 0; i < v; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			int index_num = Integer.parseInt(st.nextToken());
 			while(true) {
 				int number = Integer.parseInt(st.nextToken());
 				if(number == -1) break;
 				int weight = Integer.parseInt(st.nextToken());
-				graph[index].add(new Node(number, weight));
+				graph[index_num].add(new Node(number, weight));
 			}
 		}
 		
-		visit = new boolean[V+1];
-		distance = new int[V+1];
-		int max = 1;
+		// farthest node
+		visit = new boolean[v+1];
+		distance = new int[v+1];
+		int max_index = 1;
 		BFS(1);
 		
-		for(int i = 1; i <= V; i++)
-			if(distance[max] < distance[i])
-				max = i;
+		for(int i = 1; i <= v; i++)
+			if(distance[i] > distance[max_index])
+				max_index = i;
 		
-		visit = new boolean[V+1];
-		distance = new int[V+1];
-		BFS(max);
+		visit = new boolean[v+1];
+		distance = new int[v+1];
+		BFS(max_index);
 		
 		Arrays.sort(distance);
-		System.out.print(distance[V]);
-	} 
+		System.out.print(distance[v]);
+	}
 	
-	
-	
-	private static void BFS(int v) {
+	private static void BFS(int x) {
 		Queue<Integer> q = new LinkedList<Integer>();
-		q.add(v);
-		visit[v] = true;
+		q.add(x);
+		visit[x] = true;
 		
 		while(!q.isEmpty()) {
 			int now_node = q.poll();
 			for(Node n : graph[now_node]) {
 				int number = n.number;
 				int weight = n.weight;
-				
 				if(!visit[number]) {
+					q.add(number);
 					visit[number] = true;
 					distance[number] = distance[now_node] + weight;
-					q.add(number);
 				}
 			}
 		}
