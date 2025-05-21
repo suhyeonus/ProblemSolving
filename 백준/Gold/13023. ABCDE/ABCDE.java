@@ -4,54 +4,51 @@ import java.util.ArrayList;
 
 public class Main {
 	
-	static int N;
-	static ArrayList<Integer> friends[];
-	static boolean visited[];
-	static boolean isvalid = false;
+	private static ArrayList<Integer>[] graph;
+	private static boolean[] visit;
+	private static boolean isValid = false;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
 		
-		friends = new ArrayList[N];
-		visited = new boolean[N];
+		graph = new ArrayList[n];
+		for(int i = 0; i < n; i++)
+			graph[i] = new ArrayList<Integer>();
 		
-		for(int i = 0; i < N; i++)
-			friends[i] = new ArrayList<Integer>();
-		
-		for(int i = 0; i < M; i++) {
+		for(int i = 0; i < m; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
-			int u = Integer.parseInt(st.nextToken());
-			int v = Integer.parseInt(st.nextToken());
-			friends[u].add(v);
-			friends[v].add(u);
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			graph[a].add(b);
+			graph[b].add(a);
 		}
 		
-		for(int i = 0; i < N; i++) {
-			if(!visited[i])
+		visit = new boolean[n];
+		for(int i = 0; i < n; i++) {
+			if(!visit[i])
 				DFS(i, 1);
-			if(isvalid) break;
+			if(isValid) break;
 		}
 		
-		System.out.print(isvalid ? 1 : 0);
-	} 
+		System.out.print(isValid ? 1 : 0);
+	}
 	
-	private static void DFS(int x, int len) {
-		if(isvalid) return;
-		if(visited[x]) return;
-		if(len >= 5) {
-			isvalid = true;
+	private static void DFS(int x, int depth) {
+		if(depth == 5) {
+			isValid = true;
 			return;
 		}
+		if(visit[x]) return;
+		if(isValid) return; 
 		
-		visited[x] = true;
-		for(int i : friends[x]) {
-			if(!visited[i])
-				DFS(i, len+1);
-		}
-		visited[x] = false;
+		visit[x] = true;
+		for(int i : graph[x]) 
+			if(!visit[i])
+				DFS(i, depth+1);
+		visit[x] = false;
 	}
 }
