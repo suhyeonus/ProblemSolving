@@ -15,7 +15,7 @@ public class Main {
 		
 		for(int i = 2; i <= Math.sqrt(N); i++) {
 			if(arr[i] == 1) continue;
-			for(int j = i*i; j <= N; j += i)
+			for(int j = i+i; j <= N; j += i)
 				arr[j] = 1;
 		}
 		
