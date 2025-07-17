@@ -1,31 +1,33 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer nk = new StringTokenizer(br.readLine(), " ");
-        int n = Integer.parseInt(nk.nextToken());
-        int k = Integer.parseInt(nk.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        int[][] dp = new int[n+1][k+1];
-        int[] weight = new int[n+1];
-        int[] value = new int[n+1];
+        int[][] dp = new int[N+1][K+1];
+        int[] weight = new int[N+1];
+        int[] value = new int[N+1];
 
-        for(int i = 0; i < n; i++) {
-            StringTokenizer wv = new StringTokenizer(br.readLine(), " ");
-            weight[i+1] = Integer.parseInt(wv.nextToken());
-            value[i+1] =Integer.parseInt(wv.nextToken());
+        for(int i = 1; i <= N; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            weight[i] = Integer.parseInt(st.nextToken());
+            value[i] = Integer.parseInt(st.nextToken());
         }
 
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= k; j++) {
-                if(weight[i] <= j) {
+        for(int i = 1; i <= N; i++) {
+            for(int j = 1; j <= K; j++) {
+                if(weight[i] <= j)
                     dp[i][j] = Math.max(dp[i-1][j-weight[i]] + value[i], dp[i-1][j]);
-                } else dp[i][j] = dp[i-1][j];
+                else dp[i][j] = dp[i-1][j];
             }
         }
 
-        System.out.print(dp[n][k]);
+        System.out.print(dp[N][K]);
     }
+
 }
