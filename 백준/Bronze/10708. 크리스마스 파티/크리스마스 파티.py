@@ -15,4 +15,4 @@ for i in range(m):
             is_incorrect += 1
     answer[now_target-1] += is_incorrect
 
-print("\n".join(map(str, answer)))
+print(*answer, sep="\n")
