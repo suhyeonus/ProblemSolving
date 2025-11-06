@@ -1,0 +1,1 @@
+for i in input().rstrip(): print(i*sum(map(int,list(str(ord(i))))))
